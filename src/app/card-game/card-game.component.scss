@@ -1,0 +1,199 @@
+@import "../../global";
+
+.card-game-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	padding: 22px;
+
+	h1 {
+          text-align: center;
+		color: $white;
+		font-size: 38px;
+		letter-spacing: 2px;
+		font-weight: 300;
+	}
+
+	.card-deck-block {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-direction: column;
+		transition-duration: 1.8s;
+		opacity: 1;
+
+		&.anim-shuffle {
+			transform: rotate(1080deg);
+			opacity: 0;
+		}
+
+		.card-deck {
+			display: flex;
+			flex-direction: column;
+			position: relative;
+			width: 80px;
+			height: 112px;
+			padding: 8px;
+			background-color: $white;
+			color: $grey;
+			box-shadow: 0 0.0625em 0.125em rgba(0, 0, 0, 0.15);
+			border-radius: 6px;
+
+			&.index1,
+			&.index2,
+			&.index3,
+			&.index4 {
+				position: absolute;
+				transform: translateY(4px);
+			}
+
+			&.index0 {
+				z-index: 5;
+			}
+			&.index1 {
+				z-index: 4;
+				margin: -4px 0px 0px 4px;
+			}
+			&.index2 {
+				z-index: 3;
+				margin: 0px 0px 0px 8px;
+			}
+			&.index3 {
+				z-index: 2;
+				margin: 4px 0px 0px 12px;
+			}
+			&.index4 {
+				z-index: 1;
+				margin: 8px 0px 0px 16px;
+			}
+
+			&__innerContent {
+				text-align: center;
+				height: 100%;
+				background-color: $red;
+				border-radius: 6px;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				color: $white;
+				line-height: 18px;
+				font-size: 12px;
+				padding: 6px;
+			}
+		}
+	}
+
+	.result-block {
+		.mat-raised-button.mat-button-base {
+			color: $white;
+			font-size: 18px;
+			text-transform: uppercase;
+			letter-spacing: 1.3px;
+
+			&.mat-primary {
+				background-color: $red;
+				margin-right: 12px;
+			}
+			&.mat-accent {
+				background-color: $blue;
+			}
+		}
+	}
+
+	.card-block {
+		display: flex;
+          flex-wrap: wrap;
+		flex-direction: row;
+		justify-content: space-between;
+		padding: 22px;
+		margin: 28px 0;
+		background-color: $darkBlue;
+		border-radius: 8px;
+
+		.card-item-container {
+               box-sizing: border-box;
+               margin: 0 2px;
+               width: calc(1/10*100% - (1 - 1/10)*10px);
+
+               &:nth-child(10n) {
+                    margin: 0 0 0 2px;
+               }
+
+               &.hidden {
+                    display: none;
+               }
+
+               .card-item {
+				position: relative;
+				width: 80px;
+				height: 112px;
+                    margin: 0 auto;
+				padding: 8px;
+				background-color: $white;
+				color: $grey;
+				box-shadow: 0 0.0625em 0.125em rgba(0, 0, 0, 0.15);
+				border-radius: 6px;
+				opacity: 1;
+
+				&.hidden {
+					opacity: 0;
+				}
+
+				&.red {
+					color: $red;
+				}
+
+				&__corner {
+					height: 33.3%;
+
+					ul {
+						list-style: none;
+						padding-inline-start: 0;
+						margin-block-start: 0;
+						margin-block-end: 0;
+					}
+
+					&--reverse {
+						transform: rotate(180deg);
+					}
+				}
+
+				&__center {
+					display: flex;
+					justify-content: center;
+					align-items: center;
+					height: 33.3%;
+					font-size: 32px;
+				}
+			}
+		}
+	}
+}
+
+
+@media (max-width: $md-max) {
+     .card-block {
+		.card-item-container {
+               margin: 10px 2px 0 2px !important;
+               width: calc(1/5*100% - (1 - 1/5)*10px) !important;
+
+               &:nth-child(5n) {
+                    margin: 0 0 0 2px;
+               }
+		}
+	}
+}
+
+@media (max-width: $sm-min) {
+     .card-block {
+		.card-item-container {
+               margin: 10px 2px 0 2px !important;
+               width: calc(1/2*100% - (1 - 1/2)*10px) !important;
+
+               &:nth-child(5n) {
+                    margin: 0 0 0 2px;
+               }
+		}
+	}
+}
