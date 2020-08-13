@@ -190,10 +190,6 @@
 		.card-item-container {
                margin: 10px 2px 0 2px !important;
                width: calc(1/2*100% - (1 - 1/2)*10px) !important;
-
-               &:nth-child(5n) {
-                    margin: 0 0 0 2px;
-               }
 		}
 	}
 }
