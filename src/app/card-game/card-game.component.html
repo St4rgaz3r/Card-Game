@@ -3,7 +3,7 @@
           Atexo Card Game
      </h1>
      <div class="card-deck-block">
-          <div class="card-deck index{{ item }}" *ngFor="let item of [0, 1, 2, 3 ,4]">
+          <div class="card-deck index{{ item }}" *ngFor="let item of [0, 1, 2, 3, 4]">
                <div *ngIf="item === 0" class="card-deck__innerContent">
                     <p>
                          Atexo Playing Card Game
@@ -11,7 +11,32 @@
                </div>
           </div>
      </div>
+     <div class="sort-block">
+          <div class="sort-block__innerContent">
+               Color sort order :
+               <span
+                    *ngFor="let color of cardColorsArray"
+                    [ngClass]="
+                    {
+                         'red' : color === '♦︎' || color === '♥︎'
+                    }"
+               >
+                    {{ color }}
+               </span>
+          </div>
+          <div class="sort-block__innerContent">
+               Number sort order :
+               <span *ngFor="let rank of ranksArray">
+                    {{ rank }}
+               </span>
+          </div>
+     </div>
      <div class="card-block">
+          <div class="card-block__headerTitle">
+               <h2>
+                    Picked cards :
+               </h2>
+          </div>
           <div
                class="card-item-container"
                *ngFor="let item of cardDeck; let i = index"
@@ -24,30 +49,72 @@
                *ngIf="i < 10"
                [ngClass]="
                {
-                    'red' : item.readableColor === '♦︎' || item.readableColor === '♥︎',
+                    'red' : item.cardColor === '♦︎' || item.cardColor === '♥︎',
                     'hidden' : isShuffled == false
                }"
                >
                     <div class="card-item__corner">
                          <ul>
                               <li>
-                                   {{ item.readableNumber }}
+                                   {{ item.value }}
                               </li>
                               <li>
-                                   {{ item.readableColor }}
+                                   {{ item.cardColor }}
                               </li>
                          </ul>
                     </div>
                     <div class="card-item__center">
-                         {{ item.readableColor }}
+                         {{ item.cardColor }}
                     </div>
                     <div class="card-item__corner card-item__corner--reverse">
                          <ul>
                               <li>
-                                   {{ item.readableNumber }}
+                                   {{ item.value }}
                               </li>
                               <li>
-                                   {{ item.readableColor }}
+                                   {{ item.cardColor }}
+                              </li>
+                         </ul>
+                    </div>
+               </div>
+          </div>
+     </div>
+     <div class="card-block card-block--sorted" *ngIf="isSorted == true">
+          <div class="card-block__headerTitle">
+               <h2>
+                    Current sort :
+               </h2>
+          </div>
+          <div
+               class="card-item-container card-item-container"
+               *ngFor="let item of sortedArray"
+          >
+               <div class="card-item"
+               [ngClass]="
+               {
+                    'red' : item.cardColor === '♦︎' || item.cardColor === '♥︎'
+               }"
+               >
+                    <div class="card-item__corner">
+                         <ul>
+                              <li>
+                                   {{ item.value }}
+                              </li>
+                              <li>
+                                   {{ item.cardColor }}
+                              </li>
+                         </ul>
+                    </div>
+                    <div class="card-item__center">
+                         {{ item.cardColor }}
+                    </div>
+                    <div class="card-item__corner card-item__corner--reverse">
+                         <ul>
+                              <li>
+                                   {{ item.value }}
+                              </li>
+                              <li>
+                                   {{ item.cardColor }}
                               </li>
                          </ul>
                     </div>
@@ -55,6 +122,9 @@
           </div>
      </div>
      <div class="result-block">
+          <button mat-raised-button color="primary" type="button" (click)="colorAndNumberSort()">
+               Randomize sort order
+          </button>
           <button mat-raised-button color="primary" type="button" (click)="shuffleCardDeck()">
                Shuffle deck
           </button>

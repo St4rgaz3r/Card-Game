@@ -46,6 +46,19 @@ body {
          footer {
               color: $white;
          }
+
+         .sort-block {
+              background-color: $black !important;
+
+              span {
+                   color: $white !important;
+                   font-size: 22px;
+
+                   &.red {
+                        color: $red !important;
+                   }
+              }
+         }
     }
 }
 

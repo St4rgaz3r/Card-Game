@@ -12,10 +12,46 @@ export class CardGameComponent implements OnInit {
      constructor(private cardGameGeneratorService: CardGameGeneratorService) {}
 
      cardDeck = Array(52);
+     sortedArray = Array(10)
+     ranksArray = ['A','2','3','4','5','6','7','8','9','10','J','Q','K'];
+     cardColorsArray = ['♦︎','♥︎','♠︎','♣︎'];
      isShuffled: boolean = false;
+     isSorted: boolean = false;
 
      getCardDeck(): void {
           this.cardDeck = this.cardGameGeneratorService.generateCardDeck();
+          this.colorAndNumberSort();
+     }
+
+     public colorAndNumberSort() {
+          this.randomArray(this.ranksArray);
+          this.randomArray(this.cardColorsArray);
+
+          for (let i = 0; i < this.cardDeck.length; i++) {
+               var cardColor = i / 13 | 0;
+               var rank = i % 13;
+
+               this.cardDeck[i].cardColor = this.cardColorsArray[cardColor];
+               this.cardDeck[i].value = this.ranksArray[rank];
+               this.cardDeck[i].cardHierarchy = i;
+          }
+
+          this.isShuffled = false;
+          this.isSorted = false;
+     }
+
+     public randomArray(array) {
+          var currentIndex = array.length, temporaryValue, randomIndex;
+
+          while (0 !== currentIndex) {
+               randomIndex = Math.floor(Math.random() * currentIndex);
+               currentIndex -= 1;
+
+               temporaryValue = array[currentIndex];
+               array[currentIndex] = array[randomIndex];
+               array[randomIndex] = temporaryValue;
+          }
+          return array;
      }
 
      public shuffleCardDeck() {
@@ -38,17 +74,17 @@ export class CardGameComponent implements OnInit {
 
                return this.cardDeck;
           }, 3200);
+
+          this.isSorted = false;
      }
 
      public sortingCards(){
           if (this.isShuffled == true) {
-               var sortedArray = this.cardDeck.slice(0, 10);
+               this.sortedArray = this.cardDeck.slice(0, 10);
 
-               sortedArray.sort((x, y) => x.cardHierarchy - y.cardHierarchy);
+               this.sortedArray.sort((x, y) => x.cardHierarchy - y.cardHierarchy);
 
-               for (let i = 0; i < 10; i++) {
-                    this.cardDeck[i] = sortedArray[i];
-               }
+               this.isSorted = true;
 
           } else {
                alert('You need to shuffle your deck at least one time before sorting your cards!');

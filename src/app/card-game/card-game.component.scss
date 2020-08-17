@@ -15,6 +15,13 @@
 		font-weight: 300;
 	}
 
+     h2 {
+          color: $white;
+          margin-bottom: 0;
+          margin-top: 38px;
+          font-weight: 300;
+     }
+
 	.card-deck-block {
 		display: flex;
 		justify-content: center;
@@ -111,10 +118,24 @@
 		background-color: $darkBlue;
 		border-radius: 8px;
 
+          &__headerTitle {
+               display: block;
+               width: 100%;
+               padding: 0px 12px 24px 0;
+
+               h2 {
+                    margin-top: 0
+               }
+          }
+
 		.card-item-container {
                box-sizing: border-box;
                margin: 0 2px;
                width: calc(1/10*100% - (1 - 1/10)*10px);
+
+               &--sorted {
+                    background-color: $blue;
+               }
 
                &:nth-child(10n) {
                     margin: 0 0 0 2px;
@@ -169,6 +190,23 @@
 			}
 		}
 	}
+
+     .sort-block {
+          margin-top: 32px;
+          padding: 28px;
+          background-color: $darkBlue;
+          color: $white;
+          border-radius: 8px;
+
+          span {
+               color: $black;
+               font-size: 22px;
+
+               &.red {
+                    color: $red;
+               }
+          }
+     }
 }
 
 
